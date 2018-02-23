@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>跨域测试</title>
+	</head>
+	<style type="text/css">
+		div{
+            position: absolute;
+            left:50%;
+            top:20%;
+            margin-left:-100px;
+            margin-top:-100px;
+        }   
+	</style>
+	<body>
+		<div>
+		<table id="mydate" border="1px">
+			<tr>
+				<td>ID</td>
+				<td>CODE</td>
+				<td>NAME</td>
+			</tr>
+		</table>
+		</div>
+		<script src="./js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$.ajax({
+			type: "post",
+			url: 'http://localhost:80/apis/getList',
+			async: true,
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			headers: {
+				"content-type": "application/json",
+				"cache-control": "no-cache"
+			},
+			data: JSON.stringify({
+				'dateTime': "123"
+			}),
+			success: function(msg) {
+				if(msg.code === "000000") {
+					var data = msg.pageInfo;
+					console.log(msg);
+					if(data.list && data.list.length > 0) {
+						var listData = data.list;
+						console.log(listData);
+						var listStr='';
+						for(var i in listData) {
+							var id = listData[i].id;
+							var countrycode = listData[i].countrycode;
+							var countryname = listData[i].countryname;
+
+							 listStr += '<tr>'
+							+'<td>'+ id + '</td>' 
+							+'<td>'+ countrycode + '</td>' 
+							+'<td>'+ countryname + '</td>' +
+							'</tr>';
+						}
+
+						$("#mydate").append(listStr);
+									console.log(listStr);	
+					} else {
+					}
+				} else {
+				}
+			},
+			error: function(err) {
+			}
+		})
+
+		</script>
+	</body>
+
+</html>
