@@ -25,7 +25,7 @@ web.zip 这个是一个超级简单的静态前端项目，如果作为一个前
 ---
 
 #以上都是废话，其实这里才是所有的重点中的重点如果你懂 nginx 配置的话。
----
+```
 这里的 apis 是用来过滤你的请求那些需要被代理的
 http://localhost:8080/apis/  会被 nginx 代理
 http://localhost:8080/web/   不会被代理
@@ -46,4 +46,4 @@ location /apis {
 }
 下面这里放你的 WEB 项目路径，里面有个 index.html
 root   D:/web;
----
+```
